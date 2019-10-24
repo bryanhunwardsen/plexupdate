@@ -7,7 +7,7 @@ Download the script and put it into a Scheduled Task
 ssh into your nas																			  
 execute: 																					  
 mkdir /volume1/Scripts																		  
-wget https://github.com/martinorob/plexupdate/raw/master/plexupdate.sh 						  
+wget https://github.com/nitantsoni/plexupdate/raw/master/plexupdate.sh 						  
 																							  
 ### Setup Update Scheduler---																  
 Go back to Synology Console & Open Control Panel											  
