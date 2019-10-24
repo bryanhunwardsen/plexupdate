@@ -8,28 +8,29 @@
 # @author @nitantsoni https://github.com/nitantsoni/
 
 mkdir -p /tmp/plex/
-cd /tmp/plex/
+cd /tmp/plex/ || exit
 
-url=$(echo "https://plex.tv/api/downloads/5.json")
-jq=$(curl -s ${url})
+url="https://plex.tv/api/downloads/5.json"
+jq=$(curl -s "${url}")
 
-newversion=$(echo $jq | jq -r .nas.Synology.version | cut -d"-" -f1)
+newversion=$(echo "$jq" | jq -r .nas.Synology.version | cut -d"-" -f1)
 echo "Latest version: $newversion"
 curversion=$(synopkg version "Plex Media Server" | cut -d"-" -f1)
 echo "Current version: $curversion"
 if [[ "$newversion" > "$curversion" ]]
     then
     echo "Updated Version of Plex is available. Starting download & install."
+    # shellcheck disable=SC2016
     /usr/syno/bin/synonotify PKGHasUpgrade '{"[%HOSTNAME%]": $(hostname), "[%OSNAME%]": "Synology", "[%PKG_HAS_UPDATE%]": "Plex", "[%COMPANY_NAME%]": "Synology"}'
     cpu=$(uname -m)
-    if [ "$cpu" = "x86_64" ]; 
+    if [ "$cpu" = "x86_64" ];
         then
-        url=$(echo $jq | jq -r ".nas.Synology.releases[1] | .url")
+        url=$(echo "$jq" | jq -r ".nas.Synology.releases[1] | .url")
     else
-        url=$(echo $jq | jq -r ".nas.Synology.releases[0] | .url")
+        url=$(echo "$jq" | jq -r ".nas.Synology.releases[0] | .url")
     fi
 
-    /bin/wget $url -P /tmp/plex/
+    /bin/wget "$url" -P /tmp/plex/
     /usr/syno/bin/synopkg install /tmp/plex/*.spk && /usr/syno/bin/synopkg start "Plex Media Server" && rm -rf /tmp/plex/
 else
     echo "No new version available"
