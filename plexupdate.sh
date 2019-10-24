@@ -13,11 +13,11 @@ cd /tmp/plex/
 url=$(echo "https://plex.tv/api/downloads/5.json")
 jq=$(curl -s ${url})
 
-newversion=$(echo $jq | jq -r .nas.Synology.version)
+newversion=$(echo $jq | jq -r .nas.Synology.version | cut -d"-" -f1)
 echo "Latest version: $newversion"
-curversion=$(synopkg version "Plex Media Server")
+curversion=$(synopkg version "Plex Media Server" | cut -d"-" -f1)
 echo "Current version: $curversion"
-if [ "$newversion" != "$curversion" ]
+if [[ "$newversion" > "$curversion" ]]
     then
     echo "Updated Version of Plex is available. Starting download & install."
     /usr/syno/bin/synonotify PKGHasUpgrade '{"[%HOSTNAME%]": $(hostname), "[%OSNAME%]": "Synology", "[%PKG_HAS_UPDATE%]": "Plex", "[%COMPANY_NAME%]": "Synology"}'
