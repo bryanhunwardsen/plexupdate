@@ -5,7 +5,7 @@ Automatically update Plex Media Server on Synology NAS
 Download this script and create it is a Scheduled Task. The script will auto check to see if the current version is not the same as the latest and then proceed to update as needed.
 
 ### Download Script
-Download it via a command like `sudo wget https://github.com/nitantsoni/plexupdate/raw/master/plexupdate.sh`  
+SSH in to the NAS and download this script, via a command like `sudo wget https://github.com/nitantsoni/plexupdate/raw/master/plexupdate.sh`  
 
 ### Setup Scheduler
 From the Synology Control Panel, open up the Task Scheduler and add a "User-defined script" task  
