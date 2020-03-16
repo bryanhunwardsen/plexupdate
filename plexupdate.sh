@@ -5,7 +5,7 @@
 # @author Martino https://forums.plex.tv/u/Martino
 # @source @martinorob https://github.com/martinorob/plexupdate
 # @author @nitantsoni https://github.com/nitantsoni
-# @source @martinorob https://github.com/nitantsoni/plexupdate
+# @source @nitantsoni https://github.com/nitantsoni/plexupdate
 # @author @bryanhunwardsen https://github.com/bryanhunwardsen
 # @source @bryanhunwardsen https://github.com/bryanhunwardsen/plexupdate
 # @see https://forums.plex.tv/t/script-to-auto-update-plex-on-synology-nas-rev4/479748
